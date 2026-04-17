@@ -1,9 +1,9 @@
-export default function AlunosPage() {
-  const alunos = [
-    "Aluno 1", "Aluno 2", "Aluno 3", "Aluno 4", "Aluno 6", 
-    "Aluno 7", "Aluno 8", "Aluno 9", "Aluno 10", "Aluno 11", 
-    "Aluno 12", "Aluno 13"
-  ];
+import AlunoItem from "@/components/AlunoItem";
+
+export default async function AlunosPage() {
+  const alunos = await fetch("https://localhost:8080/alunos").then((res) => res.json());
+
+  console .log(alunos);
 
   return (
     // Fundo: Degradê radial que simula uma mesa de madeira sob luz centralizada
@@ -29,24 +29,7 @@ export default function AlunosPage() {
           
           <ul className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-4">
             {alunos.map((aluno, index) => (
-              <li 
-                key={index} 
-                className="group flex items-center justify-between border-b border-[#e5d3b3] pb-2 transition-all hover:border-[#8b4513]"
-              >
-                <div className="flex items-center gap-3">
-                  <span className="text-[10px] text-[#d2b48c] font-sans group-hover:scale-125 transition-transform">
-                    {String(index + 1).padStart(2, '0')}
-                  </span>
-                  <span className="text-lg text-[#3e2723] group-hover:text-[#8b4513] transition-colors">
-                    {aluno}
-                  </span>
-                </div>
-                
-                {/* Ícone sutil decorativo que aparece no hover */}
-                <span className="opacity-0 group-hover:opacity-100 text-[#8b4513] text-xs transition-opacity uppercase font-bold tracking-widest">
-                  Fólio
-                </span>
-              </li>
+              <AlunoItem key={aluno.id} id={aluno.id} nome={aluno.nome} index={index} />
             ))}
           </ul>
 
