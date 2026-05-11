@@ -1,9 +1,9 @@
 import AlunoItem from "@/components/AlunoItem";
 
-export default async function AlunosPage() {
-  const alunos = await fetch("https://localhost:8080/alunos").then((res) => res.json());
+import { getAlunos } from "./actions";
 
-  console .log(alunos);
+export default async function AlunosPage() {
+  const alunos = await getAlunos();
 
   return (
     // Fundo: Degradê radial que simula uma mesa de madeira sob luz centralizada
@@ -21,25 +21,30 @@ export default async function AlunosPage() {
         </div>
       </header>
       
+      
       {/* Container "Pergaminho": Bordas duplas e textura de papel rico */}
-      <main className="relative w-full max-w-2xl bg-[#fdfaf3] border-[12px] border-[#2c1b0e] shadow-[0_20px_50px_rgba(0,0,0,0.5)]">
+      <main className="relative w-full max-w-2xl bg-[#ffffff] border-[12px] border-[#2c1b0e] shadow-[0_20px_50px_rgba(0,0,0,0.5)]">
         
         {/* Detalhe de borda interna decorativa */}
-        <div className="border border-[#d2b48c] m-1 p-8 md:p-12">
+        <div className="border border-[#995700] m-1 p-8 md:p-12">
           
-          <ul className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-4">
-            {alunos.map((aluno, index) => (
-              <AlunoItem key={aluno.id} id={aluno.id} nome={aluno.nome} index={index} />
+          <ul className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-4 text-[#11100e] font-bold text-xl">
+            {alunos.map((aluno) => (
+              <li key={aluno.id}>
+                <AlunoItem id={aluno.id} nome={aluno.nome}/>
+              </li>
             ))}
+                    
           </ul>
 
           {/* Selo de Autenticidade / Rodapé */}
           <footer className="mt-12 flex flex-col items-center opacity-40">
+            
             <div className="w-16 h-16 border-2 border-[#d2b48c] rounded-full flex items-center justify-center mb-2">
               <span className="text-[#d2b48c] font-bold text-xl">DC</span>
             </div>
             <p className="text-[#8b4513] text-[10px] uppercase tracking-[0.2em]">
-              Documento Oficial • feito à mão com amor e dedicação
+              Documento Oficial
             </p>
           </footer>
         </div>
