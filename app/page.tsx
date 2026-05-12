@@ -32,7 +32,7 @@ export default function Home() {
                 Cadastrar aluno
               </Link>
               <Link
-                href="/curso"
+                href="/cursos"
                 className="inline-flex justify-center rounded-full bg-amber-950 px-6 py-3 text-sm font-semibold text-white transition hover:bg-amber-800"
               >
                 Ver cursos

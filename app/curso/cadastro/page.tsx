@@ -26,7 +26,7 @@ export default function CursoCadastroPage() {
       setProfessor("");
       setCargaHoraria("");
       setDescricao("");
-      router.push("/curso");
+      router.push("/cursos");
       return;
     }
 
